@@ -43,9 +43,20 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
+        // [todo:點擊小圖，讓大圖的src = 被點擊的小圖的 src]
+
+
+        // 1.時機點:小圖被使用者點擊
         $('.img-wrap img').click(function (e) {
             console.log('e.currentTarget:', e.currentTarget);
+            // 2.得到小圖的 src
+            const imgSrc = $(e.currentTarget).attr('src');
+            // console.log('imgSrc', imgSrc);
+
+            // 3.改大圖的 src
+            $('.product-demo img').attr('src', imgSrc)
         })
+
     </script>
 </body>
 
