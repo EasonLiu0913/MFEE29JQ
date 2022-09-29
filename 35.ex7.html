@@ -33,9 +33,6 @@
 
         // [todo:] 使用者修改了城市的下拉式選單，就把區域的選單改成該城市的區域們
         // 1.使用者改成甚麼城市？
-
-        // 3.如何修改下拉式選單裡的選項？
-
         $('#city').change(function () {
             console.log('city changed', $(this).val());
 
@@ -45,7 +42,7 @@
 
             console.log('thisDistrictArr', thisDistrictArr);
 
-            //3.
+            // 3.如何修改下拉式選單裡的選項？
             $('#district').empty();
             for (let i = 0; i < thisDistrictArr.length; i++) {
                 $('#district').append(`<option value="${i}">${thisDistrictArr[i]}區</option>`)
