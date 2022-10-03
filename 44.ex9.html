@@ -18,12 +18,16 @@
             width: 800px;
             height: 400px;
             background-color: #ccc;
+            position: relative;
         }
 
         .box {
             width: 100px;
             height: 100px;
             background-color: tomato;
+            position: absolute;
+            top: 0px;
+            left: 0px;
         }
     </style>
 </head>
@@ -38,21 +42,21 @@
 
         <div class="row mt-2">
             <div class="col-12 text-center">
-                <button class="btn btn-info ">
+                <button id="btnUp" class="btn btn-info ">
                     <i class="fa-solid fa-caret-up"></i>
                 </button>
             </div>
             <div class="col-12 text-center">
-                <button class="btn btn-info mx-3">
+                <button id="btnLeft" class="btn btn-info mx-3">
                     <i class="fa-solid fa-caret-left"></i>
                 </button>
 
-                <button class="btn btn-info mx-3">
+                <button id="btnRight" class="btn btn-info mx-3">
                     <i class="fa-solid fa-caret-right"></i>
                 </button>
             </div>
             <div class="col-12 text-center">
-                <button class="btn btn-info">
+                <button id="btnDown" class="btn btn-info">
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
             </div>
@@ -60,6 +64,43 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+
+        function moveRight() {
+            const maxLeft = $('.wrap').width() - $('.box').width();
+            // console.log('maxLeft:', maxLeft);
+            if (parseInt($('.box').css('left')) < maxLeft) {
+                $('.box').css('left', '+=100')
+            }
+        }
+        $('#btnRight').click(moveRight)
+
+        $('#btnLeft').click(function () {
+            // console.log('btnRight clicked', $('.box').css('left'));
+
+            // const maxLeft = $('.wrap').width() - $('.box').width();
+            // console.log('maxLeft:', maxLeft);
+            // if (parseInt($('.box').css('left')) < maxLeft) {
+            $('.box').css('left', '-=100')
+            // }
+
+        })
+
+        $(document).on('keydown', function (e) {
+            console.log('keydown:', e.keyCode);
+            if (e.keyCode === 39) {
+                moveRight();
+            }
+
+            if (e.keyCode === 37) {
+                $('.box').css('left', '-=100')
+            }
+        })
+
+
+    </script>
 </body>
 
 </html>
