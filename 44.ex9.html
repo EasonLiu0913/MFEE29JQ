@@ -68,42 +68,19 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
-        let boxLeft = parseInt($('.box').css('left'));
+        // let boxLeft = parseInt($('.box').css('left'));
         let index = 0;
         const speed = 10;
         let myInterval = null;
 
-        function startInterval(cssname, direction) {
+        const minLeft = 0;
+
+        function startInterval(cssname, direction, boxEdge, edge, compare) {
             myInterval = setInterval(() => {
-                // const maxLeft = $('.wrap').width() - $('.box').width();
-                // const minLeft = 0;
+                eval(`boxEdge ${direction} ${speed}`)
 
-                $('.box').css(cssname, direction + speed);
-
-                // console.log('boxLeft:', boxLeft);
-                // boxLeft += 10;
-
-                // if (boxLeft <= maxLeft) {
-                //     moveRight(boxLeft);
-                // } else {
-                //     boxLeft = maxLeft;
-                // }
-
-            }, 100);
-        }
-
-        function startInterval2() {
-            myInterval = setInterval(() => {
-                // const maxLeft = $('.wrap').width() - $('.box').width();
-                // console.log('boxLeft:', boxLeft);
-
-
-                boxLeft -= speed;
-
-                if (boxLeft >= minLeft) {
-                    moveRight(boxLeft);
-                } else {
-                    boxLeft = minLeft;
+                if (eval(`boxEdge ${compare} edge`)) {
+                    $('.box').css(cssname, boxEdge);
                 }
 
             }, 100);
@@ -118,10 +95,18 @@
             $('.box').css('left', boxLeft);
         }
 
-        $('#btnRight').mousedown(() => startInterval('left', '+='))
+        $('#btnRight').mousedown(() => {
+            const boxLeft = parseInt($('.box').css('left'));
+            const maxLeft = $('.wrap').width() - $('.box').width();
+            startInterval('left', '+=', boxLeft, maxLeft, '<=')
+        })
         $('#btnRight').mouseup(stopInterval)
 
-        $('#btnLeft').mousedown(() => startInterval('left', '-='))
+        $('#btnLeft').mousedown(() => {
+            const boxLeft = parseInt($('.box').css('left'));
+            const minLeft = 0;
+            startInterval('left', '-=', boxLeft, minLeft, '>=')
+        })
         $('#btnLeft').mouseup(stopInterval)
 
         $('#btnDown').mousedown(() => startInterval('top', '+='))
