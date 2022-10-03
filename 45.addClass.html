@@ -25,6 +25,7 @@
     <button id="btnAdd">Add</button>
     <button id="btnRemove">Remove</button>
     <button id="btnToggle">toggle</button>
+    <button id="btnHas">Has</button>
     <div class="box"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"
@@ -39,6 +40,18 @@
 
         $('#btnToggle').click(function () {
             $('.box').toggleClass('active')
+        })
+
+
+        $('#btnHas').click(function () {
+            console.log('btnHas clicked', $('.box').hasClass('active'));
+
+            if ($('.box').hasClass('active')) {
+                $('.box').removeClass('active')
+            }
+            else {
+                $('.box').addClass('active')
+            }
         })
     </script>
 </body>
