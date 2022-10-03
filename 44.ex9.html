@@ -74,9 +74,16 @@
 
         function startInterval() {
             myInterval = setInterval(() => {
-                console.log('boxLeft:', boxLeft);
+                const maxLeft = $('.wrap').width() - $('.box').width();
+                // console.log('boxLeft:', boxLeft);
                 boxLeft += 10;
-                moveRight(boxLeft);
+
+                if (boxLeft <= maxLeft) {
+                    moveRight(boxLeft);
+                } else {
+                    boxLeft = maxLeft;
+                }
+
             }, 100);
         }
 
@@ -84,13 +91,11 @@
             clearInterval(myInterval);
         }
 
+        // Unit, pure function
         function moveRight(boxLeft) {
-            const maxLeft = $('.wrap').width() - $('.box').width();
-            // console.log('maxLeft:', maxLeft);
-            if (boxLeft < maxLeft) {
-                $('.box').css('left', boxLeft);
-            }
+            $('.box').css('left', boxLeft);
         }
+
         $('#btnRight').mousedown(startInterval)
         $('#btnRight').mouseup(stopInterval)
 
