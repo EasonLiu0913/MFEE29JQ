@@ -70,19 +70,24 @@
     <script>
         let boxLeft = parseInt($('.box').css('left'));
         let index = 0;
+        const speed = 10;
         let myInterval = null;
 
-        function startInterval() {
+        function startInterval(cssname, direction) {
             myInterval = setInterval(() => {
-                const maxLeft = $('.wrap').width() - $('.box').width();
-                // console.log('boxLeft:', boxLeft);
-                boxLeft += 10;
+                // const maxLeft = $('.wrap').width() - $('.box').width();
+                // const minLeft = 0;
 
-                if (boxLeft <= maxLeft) {
-                    moveRight(boxLeft);
-                } else {
-                    boxLeft = maxLeft;
-                }
+                $('.box').css(cssname, direction + speed);
+
+                // console.log('boxLeft:', boxLeft);
+                // boxLeft += 10;
+
+                // if (boxLeft <= maxLeft) {
+                //     moveRight(boxLeft);
+                // } else {
+                //     boxLeft = maxLeft;
+                // }
 
             }, 100);
         }
@@ -92,8 +97,8 @@
                 // const maxLeft = $('.wrap').width() - $('.box').width();
                 // console.log('boxLeft:', boxLeft);
 
-                const minLeft = 0;
-                boxLeft -= 10;
+
+                boxLeft -= speed;
 
                 if (boxLeft >= minLeft) {
                     moveRight(boxLeft);
@@ -113,11 +118,17 @@
             $('.box').css('left', boxLeft);
         }
 
-        $('#btnRight').mousedown(startInterval)
+        $('#btnRight').mousedown(() => startInterval('left', '+='))
         $('#btnRight').mouseup(stopInterval)
 
-        $('#btnLeft').mousedown(startInterval2)
+        $('#btnLeft').mousedown(() => startInterval('left', '-='))
         $('#btnLeft').mouseup(stopInterval)
+
+        $('#btnDown').mousedown(() => startInterval('top', '+='))
+        $('#btnDown').mouseup(stopInterval)
+
+        $('#btnUp').mousedown(() => startInterval('top', '-='))
+        $('#btnUp').mouseup(stopInterval)
 
         // $('#btnLeft').click(function () {
         //     // console.log('btnRight clicked', $('.box').css('left'));
