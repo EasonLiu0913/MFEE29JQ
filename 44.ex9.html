@@ -28,6 +28,7 @@
             position: absolute;
             top: 0px;
             left: 0px;
+            transition: .5s;
         }
     </style>
 </head>
@@ -67,15 +68,31 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
+        let boxLeft = parseInt($('.box').css('left'));
+        let index = 0;
+        let myInterval = null;
 
-        function moveRight() {
+        function startInterval() {
+            myInterval = setInterval(() => {
+                console.log('boxLeft:', boxLeft);
+                boxLeft += 10;
+                moveRight(boxLeft);
+            }, 100);
+        }
+
+        function stopInterval() {
+            clearInterval(myInterval);
+        }
+
+        function moveRight(boxLeft) {
             const maxLeft = $('.wrap').width() - $('.box').width();
             // console.log('maxLeft:', maxLeft);
-            if (parseInt($('.box').css('left')) < maxLeft) {
-                $('.box').css('left', '+=100')
+            if (boxLeft < maxLeft) {
+                $('.box').css('left', boxLeft);
             }
         }
-        $('#btnRight').click(moveRight)
+        $('#btnRight').mousedown(startInterval)
+        $('#btnRight').mouseup(stopInterval)
 
         $('#btnLeft').click(function () {
             // console.log('btnRight clicked', $('.box').css('left'));
@@ -89,6 +106,7 @@
         })
 
         $(document).on('keydown', function (e) {
+            e.preventDefault();
             console.log('keydown:', e.keyCode);
             if (e.keyCode === 39) {
                 moveRight();
