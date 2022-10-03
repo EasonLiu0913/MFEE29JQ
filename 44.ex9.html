@@ -87,6 +87,23 @@
             }, 100);
         }
 
+        function startInterval2() {
+            myInterval = setInterval(() => {
+                // const maxLeft = $('.wrap').width() - $('.box').width();
+                // console.log('boxLeft:', boxLeft);
+
+                const minLeft = 0;
+                boxLeft -= 10;
+
+                if (boxLeft >= minLeft) {
+                    moveRight(boxLeft);
+                } else {
+                    boxLeft = minLeft;
+                }
+
+            }, 100);
+        }
+
         function stopInterval() {
             clearInterval(myInterval);
         }
@@ -99,16 +116,19 @@
         $('#btnRight').mousedown(startInterval)
         $('#btnRight').mouseup(stopInterval)
 
-        $('#btnLeft').click(function () {
-            // console.log('btnRight clicked', $('.box').css('left'));
+        $('#btnLeft').mousedown(startInterval2)
+        $('#btnLeft').mouseup(stopInterval)
 
-            // const maxLeft = $('.wrap').width() - $('.box').width();
-            // console.log('maxLeft:', maxLeft);
-            // if (parseInt($('.box').css('left')) < maxLeft) {
-            $('.box').css('left', '-=100')
-            // }
+        // $('#btnLeft').click(function () {
+        //     // console.log('btnRight clicked', $('.box').css('left'));
 
-        })
+        //     // const maxLeft = $('.wrap').width() - $('.box').width();
+        //     // console.log('maxLeft:', maxLeft);
+        //     // if (parseInt($('.box').css('left')) < maxLeft) {
+        //     $('.box').css('left', '-=100')
+        //     // }
+
+        // })
 
         $(document).on('keydown', function (e) {
             e.preventDefault();
