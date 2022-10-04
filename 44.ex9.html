@@ -43,21 +43,21 @@
 
         <div class="row mt-2">
             <div class="col-12 text-center">
-                <button id="btnUp" class="btn btn-info ">
+                <button id="btnUp" class="btn  ">
                     <i class="fa-solid fa-caret-up"></i>
                 </button>
             </div>
             <div class="col-12 text-center">
-                <button id="btnLeft" class="btn btn-info mx-3">
+                <button id="btnLeft" class="btn  mx-3">
                     <i class="fa-solid fa-caret-left"></i>
                 </button>
 
-                <button id="btnRight" class="btn btn-info mx-3">
+                <button id="btnRight" class="btn  mx-3">
                     <i class="fa-solid fa-caret-right"></i>
                 </button>
             </div>
             <div class="col-12 text-center">
-                <button id="btnDown" class="btn btn-info">
+                <button id="btnDown" class="btn ">
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
             </div>
@@ -127,14 +127,22 @@
         // })
 
         $(document).on('keydown', function (e) {
-            e.preventDefault();
+            // e.preventDefault();
             console.log('keydown:', e.keyCode);
             if (e.keyCode === 39) {
                 moveRight();
+                // $('#btnRight').addClass('btn-info')
             }
 
             if (e.keyCode === 37) {
                 $('.box').css('left', '-=100')
+            }
+        })
+
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 39) {
+                moveRight();
+                $('#btnRight').removeClass('btn-info')
             }
         })
 
