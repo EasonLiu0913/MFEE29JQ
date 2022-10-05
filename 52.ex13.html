@@ -41,9 +41,22 @@
         // $('button').click(function () {
         //     $('.nav').toggleClass('hide');
         // })
+        let lastScroll = 0;
 
         $(window).scroll(function () {
+            const scrollNow = $(window).scrollTop();
 
+            console.log('scrollNow', scrollNow);
+            console.log('lastScroll', lastScroll);
+            console.log('scrollNow > lastScroll', scrollNow > lastScroll);
+            if (scrollNow > lastScroll) {
+                $('.nav').addClass('hide');
+            }
+            else {
+                $('.nav').removeClass('hide');
+            }
+
+            lastScroll = scrollNow;
         })
     </script>
 </body>
