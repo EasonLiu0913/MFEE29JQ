@@ -96,6 +96,13 @@
                 $('.wrap').removeClass('show');
             }
         })
+
+        console.log('section2', $('.section2').offset());
+        $('.section2').offset({
+            top: '50', //數值為字串
+            left: '100',
+        }
+        )
     </script>
 
 </body>
