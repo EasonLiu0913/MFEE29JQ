@@ -33,6 +33,26 @@
 <body>
     <div class="banner"></div>
     <div class="nav "></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+        const navOffsetTop = $('.nav').offset().top;
+
+
+        $(window).scroll(function () {
+            console.log('window scrolltop', $(window).scrollTop());
+            const nowScroll = $(window).scrollTop();
+            console.log('navOffsetTop', navOffsetTop);
+
+            if (nowScroll >= navOffsetTop) {
+                $('.nav').addClass('fixed')
+            }
+            else {
+                $('.nav').removeClass('fixed')
+            }
+        })
+    </script>
 </body>
 
 </html>
